@@ -17,24 +17,29 @@ class SessionController extends Controller
     public function show(Request $request)
     {
         if ($request->session()->has('key')) {
-            var_dump('old visitor');
-
-            return response(true);
+            //var_dump('old visitor');
+            $user = [
+                'modal' => false,
+            ];
 
         } else {
 
             $session = $request->session()->all();
             $request->session()->put('key', ($session['_token']));
-            var_dump('new visitor');
-            return response(false);
+            //var_dump('new visitor');
+            $user = [
+                'modal' => true,
+            ];
         }
+
+        return view('homePage', compact('user'));
     }
 
     public function exit(Request $request) {
 
         session()->flush();
-        var_dump('Forgetted');
+        //var_dump('Forgetted');
 
-
+        return back();
     }
 }
