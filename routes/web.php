@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\SessionController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/cookies', [SessionController::class, 'show']);
+Route::get('/cookies/forget', [SessionController::class, 'exit']);
 
 Auth::routes();
 
